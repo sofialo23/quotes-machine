@@ -1,0 +1,28 @@
+body{
+}
+#quote-box{
+	background-color: yellow;
+  	width: 450px;
+  	position: fixed; 
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -60%);
+}
+
+.text{
+	background-color: blue;
+}
+
+.author{
+	background-color: red;
+}
+
+.tweet-quote{
+	background-color: green;
+}
+
+.new-quote{
+	background-color: orange;
+	
+}
+
