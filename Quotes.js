@@ -260,11 +260,10 @@ class Quotes extends React.Component {
                 <div class = "author"> 
                     <h2 id="author" >{this.state.author}</h2>
                 </div>
-                <div class = "tweet-quote"> 
+                <div class = "footer"> 
                     <a href="https://twitter.com/intent/tweet" id="tweet-quote">Tweet</a>
-               </div>
-               <div class = "new-quote">
-               <button id="new-quote" onClick={this.changeQuote}>New Quote</button>
+            
+                    <button id="new-quote" onClick={this.changeQuote}>New Quote</button>
                </div>
                
             </div>

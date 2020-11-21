@@ -11,18 +11,26 @@ body{
 
 .text{
 	background-color: blue;
+	border: solid black 3px;
+	text-align: center;
 }
 
 .author{
 	background-color: red;
+	border: solid black 3px;
+	text-align: right;
 }
 
-.tweet-quote{
+.footer{
 	background-color: green;
+	border: solid black 3px;
+	display: flex;
+	justify-content: space-between;
 }
 
-.new-quote{
-	background-color: orange;
-	
+#new-quote{
+
 }
+
+
 
