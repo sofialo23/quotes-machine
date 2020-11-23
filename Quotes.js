@@ -1,3 +1,4 @@
+
 const colors = [
   '#16a085',
   '#27ae60',
@@ -8,9 +9,11 @@ const colors = [
   '#FB6964',
   '#342224',
   '#472E32',
-  '#BDBB99',
+  '#4d4646',
   '#77B1A9',
   '#73A857'];
+
+const FADE_DURATION = 500;
 
 class Quotes extends React.Component {
     constructor(props){
@@ -19,7 +22,10 @@ class Quotes extends React.Component {
             quote: '',
             author: '',
             rand: '',
-            color: ''
+            color: '',
+
+            fadeTransition: null,
+            fadeState : 'fade_in'
         };
 
         this.changeQuote = this.changeQuote.bind(this);
@@ -229,6 +235,7 @@ class Quotes extends React.Component {
 {
        "quote":"If you can dream it, you can achieve it.","author":"Zig Ziglar"}
         ];
+
         this.min = 0;
         this.max = 101
         this.rand = Math.floor(this.min + Math.random() * (this.max-this.min));
@@ -256,13 +263,31 @@ class Quotes extends React.Component {
     }
 
     changeQuote(){ //the submit button handler
+      const timeout = setTimeout(() => {
+
         this.calculateRand();
         this.setState({
             quote: this.allQuotes[this.state.rand].quote,
             author: this.allQuotes[this.state.rand].author,
-            color: this.getRandomColor()
+            color: this.getRandomColor(),
+
+            //Aplply additional state to control trans
+            fadeTransition: null,
+            fadeState: 'fade-in'
         });
+    }, FADE_DURATION);
+
+      // Stop any existing transition
+    clearTimeout(this.state.fadeTransition);
+
+    // Update state to perform the fade out from
+    // current quote
+    this.setState({ 
+        fadeState: 'fade-out', 
+        fadeTransition: timeout
+    });
     }
+
 
     componentWillMount(){
         const min = 0;
@@ -275,24 +300,26 @@ class Quotes extends React.Component {
             color: this.getRandomColor()
         })
     }
+
     render(){
         return(
-          <div className="container" style={{backgroundColor: this.state.color }}>
+          <div className='container' style={{backgroundColor: this.state.color,  transitionDuration: `${FADE_DURATION}ms`}} >
+
             <div id="quote-box">
                 <div className = "text"> 
-                    <h1 id='text' style={{color: this.state.color }}><i className="fa fa-quote-left" aria-hidden="true"></i> {this.state.quote}</h1>
+                    <h1 id='text ' class = {`fade-wrapper ${this.state.fadeState}`} style={{color: this.state.color, transitionDuration: `${FADE_DURATION}ms` }}><i className="fa fa-quote-left" aria-hidden="true"></i> {this.state.quote}</h1>
                 </div>
                 <div className = "author"> 
-                    <h2 id="author" style={{color: this.state.color }} >- {this.state.author}</h2>
+                    <h2 id="author"  class = {`fade-wrapper ${this.state.fadeState}`} style={{color: this.state.color, transitionDuration: `${FADE_DURATION}ms` }} >- {this.state.author}</h2>
                 </div>
                 <div className = "footer"> 
                     <div className = "shareBtns">
-                        <a href="https://twitter.com/intent/tweet" target="_blank" id="tweet-quote" style={{backgroundColor: this.state.color }}><i className="fab fa-twitter"></i></a>
+                        <a href="https://twitter.com/intent/tweet" target="_blank" id="tweet-quote" style={{backgroundColor: this.state.color,  transitionDuration: `${FADE_DURATION}ms` }}><i className="fab fa-twitter"></i></a>
                    
-                        <a href="https://www.tumblr.cstyle={{color: this.state.color }}om/widgets/share/tool?posttype=quote&tags=quotes,freecodecamp&caption=Amelia%20Earhart&content=The%20most%20difficult%20thing%20is%20the%20decision%20to%20act%2C%20the%20rest%20is%20merely%20tenacity.&canonicalUrl=https%3A%2F%2Fwww.tumblr.com%2Fbuttons&shareSource=tumblr_share_button" target="_blank" id="tumblrBtn" style={{backgroundColor: this.state.color }}><i class="fab fa-tumblr"></i></a>
+                        <a href="https://www.tumblr.cstyle={{color: this.state.color }}om/widgets/share/tool?posttype=quote&tags=quotes,freecodecamp&caption=Amelia%20Earhart&content=The%20most%20difficult%20thing%20is%20the%20decision%20to%20act%2C%20the%20rest%20is%20merely%20tenacity.&canonicalUrl=https%3A%2F%2Fwww.tumblr.com%2Fbuttons&shareSource=tumblr_share_button" target="_blank" id="tumblrBtn" style={{backgroundColor: this.state.color,  transitionDuration: `${FADE_DURATION}ms` }}><i class="fab fa-tumblr"></i></a>
                     </div>
                     <div className = "newBtn">
-                        <button style={{backgroundColor: this.state.color }} id="new-quote" onClick={this.changeQuote} >New Quote</button>
+                        <button style={{backgroundColor: this.state.color, transitionDuration: `${FADE_DURATION}ms` }} id="new-quote" onClick={this.changeQuote} >New Quote</button>
                     </div>
                </div>
               
