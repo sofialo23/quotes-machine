@@ -1,10 +1,25 @@
+const colors = [
+  '#16a085',
+  '#27ae60',
+  '#2c3e50',
+  '#f39c12',
+  '#e74c3c',
+  '#9b59b6',
+  '#FB6964',
+  '#342224',
+  '#472E32',
+  '#BDBB99',
+  '#77B1A9',
+  '#73A857'];
+
 class Quotes extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             quote: '',
             author: '',
-            rand: ''
+            rand: '',
+            color: ''
         };
 
         this.changeQuote = this.changeQuote.bind(this);
@@ -222,6 +237,7 @@ class Quotes extends React.Component {
     calculateRand(){
         const min = 0;
         const max = 101;
+        
         var randNum = Math.floor(min + Math.random() * (max - min));
 
          while(this.state.rand == randNum){
@@ -230,7 +246,13 @@ class Quotes extends React.Component {
          this.setState({
             rand: randNum,
          });
-        
+
+    }
+
+    getRandomColor() {
+      const diffColors = colors.filter(color => color !== this.state.color);
+      const randomColorIndex = Math.floor(Math.random() * diffColors.length);
+      return diffColors[randomColorIndex];
     }
 
     changeQuote(){ //the submit button handler
@@ -238,6 +260,7 @@ class Quotes extends React.Component {
         this.setState({
             quote: this.allQuotes[this.state.rand].quote,
             author: this.allQuotes[this.state.rand].author,
+            color: this.getRandomColor()
         });
     }
 
@@ -249,24 +272,34 @@ class Quotes extends React.Component {
             quote: this.allQuotes[this.rand].quote,
             author: this.allQuotes[this.rand].author,
             rand: randNum,
+            color: this.getRandomColor()
         })
     }
     render(){
         return(
+          <div className="container" style={{backgroundColor: this.state.color }}>
             <div id="quote-box">
-                <div class = "text"> 
-                    <h1 id='text'>{this.state.quote}</h1>
+                <div className = "text"> 
+                    <h1 id='text' style={{color: this.state.color }}><i className="fa fa-quote-left" aria-hidden="true"></i> {this.state.quote}</h1>
                 </div>
-                <div class = "author"> 
-                    <h2 id="author" >{this.state.author}</h2>
+                <div className = "author"> 
+                    <h2 id="author" style={{color: this.state.color }} >- {this.state.author}</h2>
                 </div>
-                <div class = "footer"> 
-                    <a href="https://twitter.com/intent/tweet" id="tweet-quote">Tweet</a>
-            
-                    <button id="new-quote" onClick={this.changeQuote}>New Quote</button>
+                <div className = "footer"> 
+                    <div className = "shareBtns">
+                        <a href="https://twitter.com/intent/tweet" target="_blank" id="tweet-quote" style={{backgroundColor: this.state.color }}><i className="fab fa-twitter"></i></a>
+                   
+                        <a href="https://www.tumblr.cstyle={{color: this.state.color }}om/widgets/share/tool?posttype=quote&tags=quotes,freecodecamp&caption=Amelia%20Earhart&content=The%20most%20difficult%20thing%20is%20the%20decision%20to%20act%2C%20the%20rest%20is%20merely%20tenacity.&canonicalUrl=https%3A%2F%2Fwww.tumblr.com%2Fbuttons&shareSource=tumblr_share_button" target="_blank" id="tumblrBtn" style={{backgroundColor: this.state.color }}><i class="fab fa-tumblr"></i></a>
+                    </div>
+                    <div className = "newBtn">
+                        <button style={{backgroundColor: this.state.color }} id="new-quote" onClick={this.changeQuote} >New Quote</button>
+                    </div>
                </div>
-               
+              
             </div>
+
+          </div>
+
         )
     }
 

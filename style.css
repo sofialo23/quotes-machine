@@ -1,36 +1,74 @@
-body{
+html, body, .box { height: 100%; width: 100%; margin: 0; }
+
+.container{
+	width: 100%;
+	height: 100%;
+	background-color: pink;
 }
 #quote-box{
-	background-color: yellow;
+	background-color: white;
+	padding: 30px;
   	width: 450px;
   	position: fixed; 
   	top: 50%;
   	left: 50%;
   	transform: translate(-50%, -60%);
+  	display: grid;
 }
 
 .text{
-	background-color: blue;
-	border: solid black 3px;
 	text-align: center;
+	background-color: white;
+	font-size: 20px;
 }
 
 .author{
 	background-color: red;
-	border: solid black 3px;
 	text-align: right;
+	background-color: white;
+	font-size: 15px;
 }
 
 .footer{
-	background-color: green;
-	border: solid black 3px;
 	display: flex;
+	flex-direction: row;
 	justify-content: space-between;
 }
 
 #new-quote{
-
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 19px;
+  outline: none;
 }
 
+#tweet-quote{
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  width: 40px;
+  height: 25px;
+  padding: 12px 10px 14px 10px;
+  text-align: center;
+  display: inline-block;
+  font-size: 25px;
+  margin-right: 10px;
+}
 
-
+#tumblrBtn{
+background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  width: 40px;
+  height: 25px;
+  padding: 12px 10px 14px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+}
